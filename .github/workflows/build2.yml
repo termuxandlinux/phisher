@@ -1,36 +1,32 @@
-name: Build Debian Package
+name: Build DEBIAN Package
 
 on:
   push:
     branches:
-      - main  # Anpassen, wenn Ihre Hauptbranch einen anderen Namen hat
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Set up Docker
-      uses: actions/setup-docker@v2
+    - name: Set up Node.js 20
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
       
-    - name: Install build dependencies
+    - name: Set up dpkg
+      run: sudo apt-get update && sudo apt-get install -y dpkg
+      
+    - name: Build DEBIAN package
       run: |
-        sudo apt-get update
-        sudo apt-get install -y dpkg-dev
-        
-    - name: Build Debian Package
-      run: |
-        mkdir build
-        cp -r DEBIAN/* build/DEBIAN/
-        cp -r usr/* build/usr/
-        cp -r etc/* build/etc/
-        dpkg-deb --build build/
-        
-    - name: Upload Artifact
+        dpkg-deb --build . ~/phisher.deb
+      
+    - name: Upload package as artifact
       uses: actions/upload-artifact@v2
       with:
         name: debian-package
-        path: "*.deb"
+        path: ~/phisher.deb
