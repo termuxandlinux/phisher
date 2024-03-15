@@ -1,4 +1,4 @@
-name: Build Debian Package
+name: Create Debian Based Package
 
 on:
   push:
