@@ -1,0 +1,2 @@
+# Ignoriere das Workflow-File zum Erstellen des Debian-Pakets
+.github/workflows/build_deb.yml
