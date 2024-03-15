@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Pfad zur Python-Datei
+PYTHON_SCRIPT="/usr/share/phisher/maxphisher.py"
+
+# Überprüfen, ob die Python-Datei existiert
+if [ ! -f "$PYTHON_SCRIPT" ]; then
+    echo "Die Python-Datei $PYTHON_SCRIPT wurde nicht gefunden." 1>&2
+    exit 1
+fi
+
+# Starten der Python-Datei
+python3 "$PYTHON_SCRIPT"

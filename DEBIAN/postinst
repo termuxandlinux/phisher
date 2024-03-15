@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Post-Installations-Skript für das MaxPhisher-Paket
+
+# Stellt sicher, dass das Skript als Root ausgeführt wird
+if [ "$(id -u)" != "0" ]; then
+    echo "Dieses Skript muss als Root ausgeführt werden." 1>&2
+    exit 1
+fi
+
+# Verschieben der Dateien in den richtigen Ordner
+echo "Verschiebe Dateien in den richtigen Ordner..."
+mkdir -p /usr/share/phisher  # Erstellt den Ordner, falls er nicht vorhanden ist
+cp -r usr/share/phisher/* /usr/share/phisher/
+
+# Erstellen des Ausführungsskripts in /etc/bin/
+echo "Erstelle Ausführungsskript..."
+cp etc/bin/maxphisher /etc/bin/phisher
+chmod +x /etc/bin/phisher
+
+echo "Installation abgeschlossen."

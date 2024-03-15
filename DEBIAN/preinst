@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Pre-Installations-Skript für das MaxPhisher-Paket
+
+# Prüfen, ob Python 3 installiert ist
+if ! command -v python3 &> /dev/null; then
+    echo "Python 3 ist nicht installiert. Installation wird gestartet..."
+    apt update
+    apt install -y python3
+    if [ $? -ne 0 ]; then
+        echo "Fehler beim Installieren von Python 3. Das Paket kann nicht installiert werden."
+        exit 1
+    fi
+    echo "Python 3 erfolgreich installiert."
+fi
+
+exit 0
